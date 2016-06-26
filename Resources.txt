@@ -1,0 +1,7 @@
+FontAwesome - http://fontawesome.io/
+
+Normalize: https://necolas.github.io/normalize.css/
+
+Google Fonts: https://www.google.com/fonts
+
+jQuery: https://jquery.com/

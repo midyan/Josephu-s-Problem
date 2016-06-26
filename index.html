@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>Josephus's Problem</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link type="text/css" rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/normalize.css">
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+</head>
+<body>
+   
+    <section class="slide1">
+        <div class="slide1Wrapper">
+            <section class="textcontent">
+                <h1 class="pageTitle">Josephu's Problem</h1>
+                <p class="introduction">Josephu's Problem is a well known mathematical problem that involves counting and divergent series. Every second position of a circle divided evenly by N is removed. What is the last remaining position?</p>
+                <p class="paragraph2">You didn't get any of that ? Oh, don't worry. We solved it for you!</p>
+            </section>
+            
+            <div class="formWrapper">
+                <form class="numberCheckForm">
+                    <input class="inputNumberField" placeholder="Type the number here" type="text">
+                    <button class="submitNumber">SOLVE IT</button><br>
+                    <input id = "result" class="Result" type="text" placeholder="0" disabled>
+                </form>
+            </div>
+
+            <div class="indicators">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                <p>SCROLL DOWN</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="slide2">
+        <div class="slide2Wrapper">
+            <h2>What is this problem?</h2>
+            <p>Let's say you and some other people owe money to very shady mafia of mathematicians. They, for no particular reason, decide to spare one of you.So, everyone will be put around in a circle and they will start shooting every second alive person until there is only one left standing. If you want to survive, you have to know what position you need to take in order to not get shot. How do you do that?</p>
+
+            <p>Being very good with numbers, and with an unbreakable will to survive, you start running different scenarios through your head. If they bring only two people, it is obvious that the first one would be spared. If they bring three people, the third one will. If they bring 4, it would be the first again. Of course, you have to that with a black hood over your head in the back of van going to the middle of the desert. At least you have nothing to distract you along the way, hum?</p>
+
+            <p>Anyway, going throught all those different scenarios, you start to realize there is a pattern:</p>
+            <ul>
+                <li>1 1</li>
+                <li>2 1</li>
+                <li>3 3</li>
+                <li>4 1</li>
+                <li>5 3</li>
+                <li>6 5</li>
+                <li>7 7</li>
+                <li>8 1</li>
+                <li>9 3</li>
+                <li>10 5</li>
+                <li>11 7</li>
+                <li>12 9</li>
+                <li>13 11</li>
+                <li>14 13</li>
+                <li>15 15 </li>
+                <li>16 1</li>
+            </ul>
+
+            <p>The result series (right hand side) resets at every power of 2. It makes sense, since every second person is being shot. But hey, that is not all. This is a very simple series, aside from the eventual reset at powers of 2. You just have to add two to the previous value for every new person that arrives at this mathematical russian roullet.</p>
+
+            <p>If you need to find where you should stand if 14 other people decided to make the same life choices as you did, you can reason that it is equal to the number of people in this hellish circle minus the closest lower power of two: 15-8 = 7. Now, that gives you the number of steps in the series that adds two to every step: So 7*2 = 14. Since you start at 1, you need to add 1 to this result. So 14+1 = 15. You rejoice yourself in the certainty of survival.</p>
+
+            <p>Let's recap. You owed money to the wrong people, you are tied up to the back of a van going to take a stroll through a desolate desert before you are killed by a quaint mathematical mafia and you just found a generalization for a mathematical problem that will save your life. I have to say, you have outdone yourself. Congratulations.</p>
+        </div>
+    </section>
+    
+    <script type="text/javascript">
+        
+        function lowestPower2(num){
+            return Math.pow(2, Math.floor( Math.log( num )/Math.log( 2 ))); 
+        }
+
+        function getSaFePos(num){
+            var lowerP2 = lowestPower2(num); //Get closest lower power of two
+            return 2*(num-lowerP2)+1;
+        }
+        $(document).ready(function(){
+            var result = document.getElementById("result");
+            $('.inputNumberField').on('input', function (event) { 
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+           
+            $(".submitNumber").click(function(event){
+                event.preventDefault();
+                var num = $(".inputNumberField").val();  //Get input value
+                result.value = getSaFePos(num);
+            });           
+           
+        });
+    </script>
+    
+</body>
+</html>
